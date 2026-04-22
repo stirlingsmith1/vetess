@@ -13,7 +13,7 @@ export default function VeteranIntakeModal({ isOpen, onClose }) {
             onClick={onClose}
             className="absolute right-5 top-5 text-sm font-medium text-[#6a6a6a] transition hover:text-[#1f1f1f]"
           >
-            close
+            Close
           </button>
 
           {/* modal intro */}
