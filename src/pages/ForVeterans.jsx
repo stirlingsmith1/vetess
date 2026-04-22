@@ -18,7 +18,7 @@ export default function ForVeterans() {
           </h1>
 
           <p className="mx-auto mb-8 max-w-2xl text-sm leading-7 text-[#5f5f5f] md:text-base">
-            share a few details to help us understand your goals and what kind of support you need.
+            Share a few details to help us understand your goals and what kind of support you need.
           </p>
 
           {/* open modal button */}
