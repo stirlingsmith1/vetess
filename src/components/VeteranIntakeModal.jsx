@@ -107,7 +107,7 @@ export default function VeteranIntakeModal({ isOpen, onClose }) {
           {/* modal footer */}
           <div className="mt-8 flex flex-col gap-3 border-t border-[#efe5d6] pt-6 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xs leading-5 text-[#7a7a7a]">
-              This is the first step in the intake process.
+              This is the first step in getting you connected to the right opportunities.
             </p>
 
             <div className="flex flex-col gap-3 sm:flex-row">
