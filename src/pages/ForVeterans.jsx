@@ -27,7 +27,7 @@ export default function ForVeterans() {
             </h2>
 
             <p className="mx-auto max-w-2xl text-sm leading-7 text-[#6a6a6a] md:text-base">
-              comprehensive support designed to guide veterans, active duty,
+              Comprehensive support designed to guide veterans, active duty,
               and military families toward the right resources.
             </p>
           </div>
@@ -44,7 +44,7 @@ export default function ForVeterans() {
               </h3>
 
               <p className="mb-6 text-sm leading-7 text-[#555]">
-                browse open roles and see what opportunities line up with your goals,
+                Browse open roles and see what opportunities line up with your goals,
                 experience, and next move.
               </p>
 
@@ -64,7 +64,7 @@ export default function ForVeterans() {
               </h3>
 
               <p className="mb-6 text-sm leading-7 text-[#555]">
-                get a better understanding of the mission behind the platform
+                Get a better understanding of the mission behind the platform
                 and how it is built to support veterans.
               </p>
 
@@ -84,7 +84,7 @@ export default function ForVeterans() {
               </h3>
 
               <p className="mb-6 text-sm leading-7 text-[#555]">
-                help support the work being done to connect veterans with better
+                Help support the work being done to connect veterans with better
                 opportunities, guidance, and resources.
               </p>
 
