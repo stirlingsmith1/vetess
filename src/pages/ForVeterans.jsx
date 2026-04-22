@@ -1,26 +1,42 @@
-export default function ForVeterans() {
-  return (
-    <div className="mx-auto max-w-[1200px] px-5 py-12 md:py-20 md:px-10">
-      <div className="flex flex-col items-center">
-        <h1 className="font-display text-3xl md:text-5xl font-black text-navy-700 text-center leading-tight">
-          Services for Veterans
-        </h1>
-        
-        <p className="mt-4 text-base md:text-lg text-ink-body text-center max-w-2xl">
-          Comprehensive support designed specifically for veterans and military
-          families transitioning to civilian careers.
-        </p>
+import { useState } from "react";
+import VeteranIntakeModal from "../components/VeteranIntakeModal";
 
-        {/* CTA Button */}
-        <div className="flex justify-center w-full md:w-auto">
-          <a 
-            href="/job-board"
-            className="mt-8 md:mt-10 w-full md:w-auto text-center inline-block rounded-md bg-crimson-700 px-10 py-4 text-sm font-semibold !text-white transition-all hover:bg-crimson-500 active:scale-95 shadow-md"
+export default function ForVeterans() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  return (
+    <section className="bg-[#f7f4ef] px-4 py-16 md:px-8">
+      <div className="mx-auto max-w-6xl">
+        {/* page intro / action trigger */}
+        <div className="text-center">
+          <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#9a6b4a]">
+            Veteran Intake
+          </p>
+
+          <h1 className="mb-4 text-4xl font-bold tracking-tight text-[#1f2f6b] md:text-6xl">
+            Start Your Next Step with Vetess
+          </h1>
+
+          <p className="mx-auto mb-8 max-w-2xl text-sm leading-7 text-[#5f5f5f] md:text-base">
+            This is the beginning of the intake process and gives veterans a
+            simple way to share what they’re looking for.
+          </p>
+
+          {/* open modal button */}
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="inline-flex items-center justify-center rounded-full bg-[#9b7a46] px-6 py-3 text-sm font-medium text-white transition hover:opacity-90"
           >
-            View Job Board
-          </a>
+            Start Intake Form
+          </button>
         </div>
       </div>
-    </div>
+
+      {/* intake modal */}
+      <VeteranIntakeModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </section>
   );
 }
