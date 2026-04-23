@@ -1,189 +1,468 @@
-import { useState } from "react";
-{/* fake listings for data purposes */}
+import { useMemo, useState } from "react";
+import JobCard from "../components/JobCard";
+
+
+/* fake jobs for now so the page feels full + real */
 const jobs = [
   {
     id: 1,
-    title: "Frontend Developer",
-    company: "ERA Solutions",
-    location: "Remote",
-    type: "Full-Time",
-    tag: "Veteran Preferred",
-    description:
-      "Build everything that a user sees and interacts with on a webpage.",
+    title: "Cybersecurity Analyst",
+    company: "Booz Allen Hamilton",
+    location: "Washington, DC",
+    type: "Full-time",
+    salary: "$85k – $120k",
+    tags: ["Veteran Preferred", "Security Clearance", "Remote OK"],
+    saved: false,
   },
   {
     id: 2,
-    title: "Backend Developer",
-    company: "ERA Solutions",
-    location: "Remote",
-    type: "Full-Time",
-    tag: "Veteran Preferred",
-    description:
-      "Build behind-the-scenes operations of a website or application.",
+    title: "Operations Manager",
+    company: "Boeing",
+    location: "Seattle, WA",
+    type: "Full-time",
+    salary: "$95k – $135k",
+    tags: ["Veteran Preferred", "Leadership"],
+    saved: false,
   },
   {
     id: 3,
-    title: "Logistics Coordinator",
-    company: "ERA Solutions",
-    location: "San Antonio, TX",
-    type: "Full-Time",
-    tag: "SkillBridge",
-    description:
-      "Support scheduling, communication, and day-to-day team operations.",
+    title: "Project Manager",
+    company: "Dell Technologies",
+    location: "Austin, TX",
+    type: "Full-time",
+    salary: "$80k – $110k",
+    tags: ["Remote", "Military Spouse OK"],
+    saved: false,
   },
   {
     id: 4,
-    title: "UX Designer",
-    company: "ERA Solutions",
-    location: "Remote",
-    type: "Contract",
-    tag: "SkillBridge",
-    description:
-      "Design simple and accessible digital experiences for users.",
+    title: "Systems Engineer",
+    company: "Lockheed Martin",
+    location: "Fort Worth, TX",
+    type: "Full-time",
+    salary: "$90k – $125k",
+    tags: ["Veteran Preferred", "Security Clearance"],
+    saved: false,
+  },
+  {
+    id: 5,
+    title: "Operations Lead",
+    company: "Amazon",
+    location: "New York, NY",
+    type: "Full-time",
+    salary: "$88k – $115k",
+    tags: ["Veteran Preferred", "Sign-On Bonus"],
+    saved: false,
+  },
+  {
+    id: 6,
+    title: "Program Manager",
+    company: "Raytheon Technologies",
+    location: "Huntsville, AL",
+    type: "Full-time",
+    salary: "$92k – $130k",
+    tags: ["Veteran Preferred", "Security Clearance", "Relocation"],
+    saved: false,
+  },
+  {
+    id: 7,
+    title: "Cybersecurity Analyst",
+    company: "Booz Allen Hamilton",
+    location: "Washington, DC",
+    type: "Full-time",
+    salary: "$85k – $120k",
+    tags: ["Veteran Preferred", "Security Clearance", "Remote OK"],
+    saved: false,
+  },
+  {
+    id: 8,
+    title: "Operations Manager",
+    company: "Boeing",
+    location: "Seattle, WA",
+    type: "Full-time",
+    salary: "$95k – $135k",
+    tags: ["Veteran Preferred", "Leadership"],
+    saved: false,
+  },
+  {
+    id: 9,
+    title: "Project Manager",
+    company: "Dell Technologies",
+    location: "Austin, TX",
+    type: "Full-time",
+    salary: "$80k – $110k",
+    tags: ["Remote", "Military Spouse OK"],
+    saved: false,
+  },
+  {
+    id: 10,
+    title: "Systems Engineer",
+    company: "Lockheed Martin",
+    location: "Fort Worth, TX",
+    type: "Full-time",
+    salary: "$90k – $125k",
+    tags: ["Veteran Preferred", "Security Clearance"],
+    saved: false,
+  },
+  {
+    id: 11,
+    title: "Operations Lead",
+    company: "Amazon",
+    location: "New York, NY",
+    type: "Full-time",
+    salary: "$88k – $115k",
+    tags: ["Veteran Preferred", "Sign-On Bonus"],
+    saved: false,
+  },
+  {
+    id: 12,
+    title: "Program Manager",
+    company: "Raytheon Technologies",
+    location: "Huntsville, AL",
+    type: "Full-time",
+    salary: "$92k – $130k",
+    tags: ["Veteran Preferred", "Security Clearance", "Relocation"],
+    saved: false,
+  },
+  {
+    id: 13,
+    title: "Cybersecurity Analyst",
+    company: "Booz Allen Hamilton",
+    location: "Washington, DC",
+    type: "Full-time",
+    salary: "$85k – $120k",
+    tags: ["Veteran Preferred", "Security Clearance", "Remote OK"],
+    saved: false,
+  },
+  {
+    id: 14,
+    title: "Operations Manager",
+    company: "Boeing",
+    location: "Seattle, WA",
+    type: "Full-time",
+    salary: "$95k – $135k",
+    tags: ["Veteran Preferred", "Leadership"],
+    saved: false,
+  },
+  {
+    id: 15,
+    title: "Project Manager",
+    company: "Dell Technologies",
+    location: "Austin, TX",
+    type: "Full-time",
+    salary: "$80k – $110k",
+    tags: ["Remote", "Military Spouse OK"],
+    saved: false,
+  },
+  {
+    id: 16,
+    title: "Systems Engineer",
+    company: "Lockheed Martin",
+    location: "Fort Worth, TX",
+    type: "Full-time",
+    salary: "$90k – $125k",
+    tags: ["Veteran Preferred", "Security Clearance"],
+    saved: false,
+  },
+  {
+    id: 17,
+    title: "Operations Lead",
+    company: "Amazon",
+    location: "New York, NY",
+    type: "Full-time",
+    salary: "$88k – $115k",
+    tags: ["Veteran Preferred", "Sign-On Bonus"],
+    saved: false,
+  },
+  {
+    id: 18,
+    title: "Program Manager",
+    company: "Raytheon Technologies",
+    location: "Huntsville, AL",
+    type: "Full-time",
+    salary: "$92k – $130k",
+    tags: ["Veteran Preferred", "Security Clearance", "Relocation"],
+    saved: false,
   },
 ];
 
-{/* search and filter functionality */}
+/* fake city cards for map view */
+const mapCities = [
+  { id: 1, city: "Washington, DC", count: 389 },
+  { id: 2, city: "New York, NY", count: 412 },
+  { id: 3, city: "Seattle, WA", count: 289 },
+  { id: 4, city: "Houston, TX", count: 234 },
+  { id: 5, city: "San Diego, CA", count: 198 },
+];
+
 export default function JobBoard() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [activeFilter, setActiveFilter] = useState("All");
+  const [activeView, setActiveView] = useState("list");
+  const [keyword, setKeyword] = useState("");
+  const [locationSearch, setLocationSearch] = useState("");
+  const [displayCount, setDisplayCount] = useState(6);
 
-  const visibleJobs = jobs.filter((job) => {
-    const matchesSearch =
-      job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      job.description.toLowerCase().includes(searchTerm.toLowerCase());
+  /* front-end only filtering for now */
+  const filteredJobs = useMemo(() => {
+    return jobs.filter((job) => {
+      const matchesKeyword =
+        keyword.trim() === "" ||
+        job.title.toLowerCase().includes(keyword.toLowerCase()) ||
+        job.company.toLowerCase().includes(keyword.toLowerCase()) ||
+        job.tags.join(" ").toLowerCase().includes(keyword.toLowerCase());
 
-    const matchesFilter =
-      activeFilter === "All" ||
-      (activeFilter === "Remote" && job.location === "Remote") ||
-      (activeFilter === "Full-Time" && job.type === "Full-Time") ||
-      (activeFilter === "Veteran Preferred" &&
-        job.tag === "Veteran Preferred") ||
-      (activeFilter === "SkillBridge" && job.tag === "SkillBridge");
+      const matchesLocation =
+        locationSearch.trim() === "" ||
+        job.location.toLowerCase().includes(locationSearch.toLowerCase());
 
-    return matchesSearch && matchesFilter;
-  });
+      return matchesKeyword && matchesLocation;
+    });
+  }, [keyword, locationSearch]);
 
-  {/* search and filter options */}
+  const displayedJobs = filteredJobs.slice(0, displayCount);
+  const savedJobs = jobs.filter((job) => job.saved);
+
   return (
-    <section className="min-h-screen bg-[#f8f5f1] px-4 py-12 md:px-8">
-      <div className="mx-auto max-w-6xl">
-        <div className="mb-10 text-center">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-[#8b6f47]">
-            Career Opportunities
-          </p>
+    <section
+      className="min-h-screen bg-[#f5f1e8] px-4 py-6 sm:px-6 lg:px-8"
+      style={{ fontFamily: '"DM Sans", sans-serif' }}
+    >
+      <style>
+        {`
+          @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
+        `}
+      </style>
 
-          <h1 className="mb-4 text-4xl font-bold tracking-tight text-[#1f1f1f] md:text-5xl">
-            Find Your Next Opportunity
-          </h1>
+      <div className="mx-auto max-w-[1240px]">
+        <div className="overflow-hidden rounded-[28px] border border-[#e3ddd2] bg-[#f3eee4] shadow-[0_1px_6px_rgba(70,52,24,0.04)]">
+          {/* top section */}
+          <div className="border-b border-[#e6e0d5] px-5 py-6 sm:px-8 sm:py-8 lg:px-10">
+            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#8d2227]">
+              Veteran Job Board
+            </p>
 
-          <p className="mx-auto max-w-2xl text-base leading-7 text-[#5f5f5f] md:text-lg">
-            Explore job opportunities built for veterans and transitioning
-            service members.
-          </p>
-        </div>
+           <h1
+  className="w-full text-[36px] sm:text-[48px] lg:text-[56px] leading-[1.04] text-[#1f2f63]"
+  style={{
+    fontFamily: '"Playfair Display", serif',
+    fontWeight: 700,
+    letterSpacing: "-0.015em",
+  }}
+>
+  Find Jobs That Value Your Service
+</h1>
 
-        <div className="mb-10 rounded-3xl border border-[#e7dfd4] bg-white p-5 shadow-sm md:p-6">
-          <input
-            type="text"
-            placeholder="Search by job title, company, or keyword..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full rounded-2xl border border-[#d8d0c4] bg-[#fcfbf8] px-4 py-3 text-sm text-[#1f1f1f] outline-none transition focus:border-[#8b6f47] focus:ring-2 focus:ring-[#8b6f47]/10"
-          />
-{/* filter buttons */}
-          <div className="mt-4 flex flex-wrap gap-3">
-            <button
-              onClick={() => setActiveFilter("All")}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition ${
-                activeFilter === "All"
-                  ? "bg-[#1f1f1f] text-white"
-                  : "border border-[#d8d0c4] bg-white text-[#4f4f4f] hover:border-[#8b6f47] hover:text-[#1f1f1f]"
-              }`}
-            >
-              All
-            </button>
+            <p className="mt-4 text-[15px] font-normal leading-6 text-[#7b746c] sm:text-[16px]">
+              2,447 openings from employers committed to hiring veterans ·
+              Updated daily
+            </p>
 
-            <button
-              onClick={() => setActiveFilter("Remote")}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition ${
-                activeFilter === "Remote"
-                  ? "bg-[#1f1f1f] text-white"
-                  : "border border-[#d8d0c4] bg-white text-[#4f4f4f] hover:border-[#8b6f47] hover:text-[#1f1f1f]"
-              }`}
-            >
-              Remote
-            </button>
-
-            <button
-              onClick={() => setActiveFilter("Full-Time")}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition ${
-                activeFilter === "Full-Time"
-                  ? "bg-[#1f1f1f] text-white"
-                  : "border border-[#d8d0c4] bg-white text-[#4f4f4f] hover:border-[#8b6f47] hover:text-[#1f1f1f]"
-              }`}
-            >
-              Full-Time
-            </button>
-
-            <button
-              onClick={() => setActiveFilter("Veteran Preferred")}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition ${
-                activeFilter === "Veteran Preferred"
-                  ? "bg-[#1f1f1f] text-white"
-                  : "border border-[#d8d0c4] bg-white text-[#4f4f4f] hover:border-[#8b6f47] hover:text-[#1f1f1f]"
-              }`}
-            >
-              Veteran Preferred
-            </button>
-
-            <button
-              onClick={() => setActiveFilter("SkillBridge")}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition ${
-                activeFilter === "SkillBridge"
-                  ? "bg-[#1f1f1f] text-white"
-                  : "border border-[#d8d0c4] bg-white text-[#4f4f4f] hover:border-[#8b6f47] hover:text-[#1f1f1f]"
-              }`}
-            >
-              SkillBridge
-            </button>
-          </div>
-        </div>
-              {/* job listing cards */}
-        <div className="grid gap-6 md:grid-cols-2">
-          {visibleJobs.length > 0 ? (
-            visibleJobs.map((job) => (
-              <article
-                key={job.id}
-                className="rounded-3xl border border-[#e7dfd4] bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-              >
-                <div className="mb-4 flex flex-wrap gap-2">
-                  <span className="rounded-full bg-[#f3ede4] px-3 py-1 text-xs font-medium text-[#6f5738]">
-                    {job.location}
-                  </span>
-                  <span className="rounded-full bg-[#f3ede4] px-3 py-1 text-xs font-medium text-[#6f5738]">
-                    {job.type}
-                  </span>
-                  <span className="rounded-full bg-[#f3ede4] px-3 py-1 text-xs font-medium text-[#6f5738]">
-                    {job.tag}
-                  </span>
+            {/* search area */}
+            <div className="mt-7 overflow-hidden rounded-[16px] border border-[#d8d1c3] bg-white shadow-[0_4px_12px_rgba(27,31,59,0.06)]">
+              <div className="flex flex-col lg:flex-row">
+                <div className="flex min-h-[72px] flex-1 items-center gap-3 border-b border-[#e7e0d4] px-5 lg:border-b-0 lg:border-r">
+                  <span className="text-[#7b766f]">🔍</span>
+                  <input
+                    type="text"
+                    value={keyword}
+                    onChange={(e) => setKeyword(e.target.value)}
+                    placeholder="Job title, MOS code, or skill..."
+                    className="w-full bg-transparent text-[15px] font-medium text-[#5f5a54] outline-none placeholder:text-[#9a948b]"
+                  />
                 </div>
 
-                <h2 className="mb-2 text-xl font-semibold text-[#1f1f1f]">
-                  {job.title}
+                <div className="flex min-h-[72px] flex-1 items-center gap-3 border-b border-[#e7e0d4] px-5 lg:border-b-0 lg:border-r">
+                  <span className="text-[#8d2227]">📍</span>
+                  <input
+                    type="text"
+                    value={locationSearch}
+                    onChange={(e) => setLocationSearch(e.target.value)}
+                    placeholder="City, State, or ZIP"
+                    className="w-full bg-transparent text-[15px] font-medium text-[#5f5a54] outline-none placeholder:text-[#9a948b]"
+                  />
+                </div>
+
+                <button
+                  className="min-h-[72px] flex items-center justify-center bg-[#9f1d20] px-8 text-[15px] text-white transition hover:bg-[#8d181b] lg:min-w-[220px]"
+                  style={{
+                    fontFamily: '"DM Sans", sans-serif',
+                    fontWeight: 600,
+                  }}
+                >
+                  Find Jobs
+                </button>
+              </div>
+            </div>
+
+            {/* tabs */}
+            <div className="mt-6 flex items-center gap-8 border-b border-[#e4ddd2] pb-4">
+              <button
+                onClick={() => setActiveView("map")}
+                className="relative pb-[2px] text-[15px]"
+                style={{
+                  fontFamily: '"DM Sans", sans-serif',
+                  fontWeight: activeView === "map" ? 500 : 400,
+                  color: activeView === "map" ? "#2b355f" : "#8a847c",
+                }}
+              >
+                🗺️ Map View
+                {activeView === "map" && (
+                  <span className="absolute -bottom-[17px] left-0 h-[2px] w-full bg-[#8d2227]" />
+                )}
+              </button>
+
+              <button
+                onClick={() => setActiveView("list")}
+                className="relative pb-[2px] text-[15px]"
+                style={{
+                  fontFamily: '"DM Sans", sans-serif',
+                  fontWeight: activeView === "list" ? 600 : 400,
+                  color: activeView === "list" ? "#2b355f" : "#8a847c",
+                }}
+              >
+                ☰ List View
+                {activeView === "list" && (
+                  <span className="absolute -bottom-[17px] left-0 h-[2px] w-full bg-[#8d2227]" />
+                )}
+              </button>
+
+              <button
+                onClick={() => setActiveView("saved")}
+                className="relative pb-[2px] text-[15px]"
+                style={{
+                  fontFamily: '"DM Sans", sans-serif',
+                  fontWeight: activeView === "saved" ? 500 : 400,
+                  color: activeView === "saved" ? "#2b355f" : "#8a847c",
+                }}
+              >
+                🏷️ Saved Jobs ({savedJobs.length})
+                {activeView === "saved" && (
+                  <span className="absolute -bottom-[17px] left-0 h-[2px] w-full bg-[#8d2227]" />
+                )}
+              </button>
+            </div>
+          </div>
+
+
+{/* map view */}
+{activeView === "map" && (
+  <div className="px-5 py-5 sm:px-8 sm:py-6 lg:px-10">
+    <div className="overflow-hidden rounded-[20px] border border-[#e2ddd2] bg-[#f3eee4] shadow-sm">
+      <div className="relative h-[420px] w-full bg-[#dbe8ec] sm:h-[500px]">
+        <iframe
+          title="United States Job Map"
+          src="https://www.google.com/maps?q=United%20States&z=4&output=embed"
+          className="h-full w-full border-0"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+      </div>
+    </div>
+
+    {/* tan container */}
+    <div className="mt-5 rounded-[20px] border border-[#ebe3d7] bg-[#f7f1e7] p-5 shadow-[0_1px_4px_rgba(70,52,24,0.03)] sm:p-6">
+      <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+        {mapCities.map((item) => (
+          <div
+            key={item.id}
+            className="rounded-[16px] border border-[#e7dfd2] bg-[#fbf9f4] px-4 py-3 shadow-[0_2px_6px_rgba(27,31,59,0.05)] transition-all duration-200 ease-out hover:-translate-y-[2px] hover:shadow-[0_6px_14px_rgba(27,31,59,0.08)] hover:border-[#ded6c8]"
+          >
+            <div className="mb-4 flex items-start justify-between gap-3">
+              <div>
+                <h3
+                  className="text-[15px] text-[#2a3560]"
+                  style={{
+                    fontFamily: '"DM Sans", sans-serif',
+                    fontWeight: 700,
+                  }}
+                >
+                  {item.city}
+                </h3>
+                <p
+                  className="mt-1 text-[14px] text-[#7a756e]"
+                  style={{
+                    fontFamily: '"DM Sans", sans-serif',
+                    fontWeight: 400,
+                  }}
+                >
+                  {item.count} open positions
+                </p>
+              </div>
+
+              <span className="text-sm text-[#9f1d20]">📍</span>
+            </div>
+
+            <button
+              className="w-full rounded-[10px] bg-[#f7f3ea] px-4 py-2 text-[14px] text-[#2f3e6a] transition-all duration-200 ease-out hover:bg-[#efe8dd]"
+              style={{
+                fontFamily: '"DM Sans", sans-serif',
+                fontWeight: 700,
+              }}
+            >
+              View Jobs
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+)}
+
+          {/* list view */}
+          {activeView === "list" && (
+            <div className="px-5 py-5 sm:px-8 sm:py-6 lg:px-10">
+              <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-[15px] font-normal text-[#7a746c]">
+                  Showing 2,447 jobs
+                </p>
+
+                <div className="h-[44px] w-full max-w-[128px] rounded-[10px] border border-[#e3ddd2] bg-white" />
+              </div>
+
+              <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                {displayedJobs.map((job) => (
+                  <JobCard key={job.id} job={job} />
+                ))}
+              </div>
+
+              {displayCount < filteredJobs.length && (
+                <div className="mt-8 flex justify-center">
+                  <button
+                    onClick={() =>
+                      setDisplayCount((prev) =>
+                        Math.min(prev + 6, filteredJobs.length)
+                      )
+                    }
+                    className="rounded-[14px] border-2 border-[#25386e] bg-white px-8 py-4 text-[18px] font-medium text-[#25386e] transition hover:bg-[#f7f5ef]"
+                    style={{
+                      fontFamily: '"DM Sans", sans-serif',
+                    }}
+                  >
+                    Load More Jobs
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* saved jobs view */}
+          {activeView === "saved" && (
+            <div className="px-5 py-12 text-center sm:px-8 lg:px-10">
+              <div className="mx-auto max-w-xl rounded-[20px] border border-dashed border-[#ddd4c8] bg-white px-6 py-12">
+                <h2
+                  className="text-2xl text-[#2a3560]"
+                  style={{
+                    fontFamily: '"Playfair Display", serif',
+                    fontWeight: 600,
+                  }}
+                >
+                  Your saved jobs will show up here
                 </h2>
 
-                <p className="mb-3 text-sm text-[#6b6b6b]">{job.company}</p>
-
-                <p className="text-sm leading-6 text-[#555]">
-                  {job.description}
+                <p className="mt-3 text-sm leading-7 text-[#726d66]">
+                  Saved jobs will appear here so you can easily revisit them
+                  later.
                 </p>
-              </article>
-            ))
-          ) : (
-            <div className="rounded-3xl border border-dashed border-[#d8d0c4] bg-white px-6 py-10 text-center text-[#6b6b6b] md:col-span-2">
-              No jobs matched your search or selected filter.
+              </div>
             </div>
           )}
         </div>
