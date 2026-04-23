@@ -1,5 +1,6 @@
 import { useState } from "react";
-{/* fake listings for data purposes */}
+
+/* fake listings for data purposes */
 const jobs = [
   {
     id: 1,
@@ -43,7 +44,15 @@ const jobs = [
   },
 ];
 
-{/* search and filter functionality */}
+const filters = [
+  "All",
+  "Remote",
+  "Full-Time",
+  "Veteran Preferred",
+  "SkillBridge",
+];
+
+/* search and filter functionality */
 export default function JobBoard() {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeFilter, setActiveFilter] = useState("All");
@@ -65,98 +74,79 @@ export default function JobBoard() {
     return matchesSearch && matchesFilter;
   });
 
-  {/* search and filter options */}
   return (
-    <section className="min-h-screen bg-[#f8f5f1] px-4 py-12 md:px-8">
+    <section className="min-h-screen bg-[#f8f5f1] px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
-        <div className="mb-10 text-center">
+        {/* header */}
+        <div className="mb-10 text-center md:mb-12">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-[#8b6f47]">
             Career Opportunities
           </p>
 
-          <h1 className="mb-4 text-4xl font-bold tracking-tight text-[#1f1f1f] md:text-5xl">
+          <h1 className="mb-4 text-3xl font-bold tracking-tight text-[#1f1f1f] sm:text-4xl md:text-5xl">
             Find Your Next Opportunity
           </h1>
 
-          <p className="mx-auto max-w-2xl text-base leading-7 text-[#5f5f5f] md:text-lg">
+          <p className="mx-auto max-w-2xl text-sm leading-7 text-[#5f5f5f] sm:text-base md:text-lg">
             Explore job opportunities built for veterans and transitioning
             service members.
           </p>
         </div>
 
-        <div className="mb-10 rounded-3xl border border-[#e7dfd4] bg-white p-5 shadow-sm md:p-6">
+        {/* here is the search and filters */}
+        <div className="mb-10 rounded-3xl border border-[#e7dfd4] bg-white p-4 shadow-sm sm:p-5 md:mb-12 md:p-6">
+          <label htmlFor="job-search" className="sr-only">
+            Search jobs
+          </label>
+
           <input
+            id="job-search"
             type="text"
             placeholder="Search by job title, company, or keyword..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full rounded-2xl border border-[#d8d0c4] bg-[#fcfbf8] px-4 py-3 text-sm text-[#1f1f1f] outline-none transition focus:border-[#8b6f47] focus:ring-2 focus:ring-[#8b6f47]/10"
+            className="w-full rounded-2xl border border-[#d8d0c4] bg-[#fcfbf8] px-4 py-3 text-sm text-[#1f1f1f] outline-none transition placeholder:text-[#8a8175] focus:border-[#8b6f47] focus:ring-2 focus:ring-[#8b6f47]/10"
           />
-{/* filter buttons */}
-          <div className="mt-4 flex flex-wrap gap-3">
-            <button
-              onClick={() => setActiveFilter("All")}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition ${
-                activeFilter === "All"
-                  ? "bg-[#1f1f1f] text-white"
-                  : "border border-[#d8d0c4] bg-white text-[#4f4f4f] hover:border-[#8b6f47] hover:text-[#1f1f1f]"
-              }`}
-            >
-              All
-            </button>
 
-            <button
-              onClick={() => setActiveFilter("Remote")}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition ${
-                activeFilter === "Remote"
-                  ? "bg-[#1f1f1f] text-white"
-                  : "border border-[#d8d0c4] bg-white text-[#4f4f4f] hover:border-[#8b6f47] hover:text-[#1f1f1f]"
-              }`}
-            >
-              Remote
-            </button>
+          <div className="mt-4 flex flex-wrap gap-2 sm:gap-3">
+            {filters.map((filter) => {
+              const isActive = activeFilter === filter;
 
-            <button
-              onClick={() => setActiveFilter("Full-Time")}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition ${
-                activeFilter === "Full-Time"
-                  ? "bg-[#1f1f1f] text-white"
-                  : "border border-[#d8d0c4] bg-white text-[#4f4f4f] hover:border-[#8b6f47] hover:text-[#1f1f1f]"
-              }`}
-            >
-              Full-Time
-            </button>
-
-            <button
-              onClick={() => setActiveFilter("Veteran Preferred")}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition ${
-                activeFilter === "Veteran Preferred"
-                  ? "bg-[#1f1f1f] text-white"
-                  : "border border-[#d8d0c4] bg-white text-[#4f4f4f] hover:border-[#8b6f47] hover:text-[#1f1f1f]"
-              }`}
-            >
-              Veteran Preferred
-            </button>
-
-            <button
-              onClick={() => setActiveFilter("SkillBridge")}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition ${
-                activeFilter === "SkillBridge"
-                  ? "bg-[#1f1f1f] text-white"
-                  : "border border-[#d8d0c4] bg-white text-[#4f4f4f] hover:border-[#8b6f47] hover:text-[#1f1f1f]"
-              }`}
-            >
-              SkillBridge
-            </button>
+              return (
+                <button
+                  key={filter}
+                  onClick={() => setActiveFilter(filter)}
+                  className={`min-h-[40px] rounded-full px-4 py-2 text-sm font-medium transition ${
+                    isActive
+                      ? "bg-[#1f1f1f] text-white"
+                      : "border border-[#d8d0c4] bg-white text-[#4f4f4f] hover:border-[#8b6f47] hover:text-[#1f1f1f]"
+                  }`}
+                >
+                  {filter}
+                </button>
+              );
+            })}
           </div>
         </div>
-              {/* job listing cards */}
-        <div className="grid gap-6 md:grid-cols-2">
+
+        {/* tried the results count */}
+        <div className="mb-6 flex items-center justify-between gap-4">
+          <p className="text-sm text-[#6b6b6b]">
+            Showing{" "}
+            <span className="font-semibold text-[#1f1f1f]">
+              {visibleJobs.length}
+            </span>{" "}
+            {visibleJobs.length === 1 ? "job" : "jobs"}
+          </p>
+        </div>
+
+        {/* cards for job listings */}
+        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-2">
           {visibleJobs.length > 0 ? (
             visibleJobs.map((job) => (
               <article
                 key={job.id}
-                className="rounded-3xl border border-[#e7dfd4] bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                className="flex h-full flex-col rounded-3xl border border-[#e7dfd4] bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
               >
                 <div className="mb-4 flex flex-wrap gap-2">
                   <span className="rounded-full bg-[#f3ede4] px-3 py-1 text-xs font-medium text-[#6f5738]">
@@ -170,11 +160,13 @@ export default function JobBoard() {
                   </span>
                 </div>
 
-                <h2 className="mb-2 text-xl font-semibold text-[#1f1f1f]">
+                <h2 className="mb-2 text-xl font-semibold leading-snug text-[#1f1f1f]">
                   {job.title}
                 </h2>
 
-                <p className="mb-3 text-sm text-[#6b6b6b]">{job.company}</p>
+                <p className="mb-3 text-sm font-medium text-[#6b6b6b]">
+                  {job.company}
+                </p>
 
                 <p className="text-sm leading-6 text-[#555]">
                   {job.description}
