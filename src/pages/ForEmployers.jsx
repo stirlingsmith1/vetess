@@ -34,7 +34,7 @@ export default function ForEmployers() {
                             {/* Value section */}
       <div className="flex mt-10 justify-center">
           <div className="bg-navy-700 p-12 max-w-[500px]">
-          <p className="m-4 text-gold-500">FOR VETERANS & MILITARY SPOUSES</p>
+          <p className="m-4 text-gold-500 text-[12px] font-semibold text-left">FOR VETERANS & MILITARY SPOUSES</p>
 
           <h1 className="m-4 font-display font-bold text-3xl text-white">Translate Your Services Into Success</h1>
 
@@ -59,7 +59,7 @@ export default function ForEmployers() {
 
 
           <div className="p-12 max-w-[500px]">
-          <p className="m-4 text-crimson-700">FOR EMPLYERS & COMPANIES</p>
+          <p className="m-4 text-crimson-700 text-[12px] font-semibold">FOR EMPLYERS & COMPANIES</p>
 
           <h1 className="m-4 font-display font-bold text-3xl text-navy-700">Hire Leaders Who Are Mission-Proven</h1>
 
