@@ -2,7 +2,7 @@ import {useNavigate} from 'react-router-dom'
 
 export default function ForEmployers() {
   
-  const navigate = useNavigate
+  const navigate = useNavigate()
 
   const veteranServices = [
     'Resume Services',
@@ -50,7 +50,7 @@ export default function ForEmployers() {
 
           <button
             type="button"
-            onClick={() => navigate('/ForVeterans')}
+            onClick={() => navigate('/for-veterans')}
             className="mt-8 mb-10 w-full rounded-md bg-crimson-700 px-5 py-3 text-sm font-semibold text-white transition hover:bg-crimson-500 sm:w-auto after:content-['→'] after:ml-2 after:font-bold"
             >
               Start Your Journey 
@@ -75,7 +75,7 @@ export default function ForEmployers() {
 
           <button
             type="button"
-            onClick={() => navigate('')}
+            onClick={() => navigate('/about')}
             className="mt-8 mb-10 w-full rounded-md bg-navy-700 px-5 py-3 text-sm font-semibold text-white transition hover:bg-navy-500 sm:w-auto after:content-['→'] after:ml-2"
             >
               Post a Job Free
