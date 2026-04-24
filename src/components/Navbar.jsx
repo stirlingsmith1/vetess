@@ -7,6 +7,7 @@ const links = [
   { label: 'For Veterans', path: '/for-veterans' },
   { label: 'For Employers', path: '/for-employers' },
   { label: 'About', path: '/about' },
+  { label: 'Contact', path: '/contact' },
   { label: 'Donate', path: '/donate' },
 ]
 
