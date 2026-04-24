@@ -8,7 +8,7 @@ export default function ForEmployers() {
         Hire Veterans
         </h1>
 
-        <p className="mt-4 text-lg text-ink-body text-center">Veterans bring discipline, leadership, and adaptability from high-pressure environments. Their strong work ethic and teamwork skills make them reliable contributors who deliver results quickly.</p>
+        <p className="mt-4 text-lg text-ink-body text-center max-w-160">Connenct with talented veterans ready to bring discipline, leadership, and commitment to your organization</p>
 
       </div>
     </div>
