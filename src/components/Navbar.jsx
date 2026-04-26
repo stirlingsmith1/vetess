@@ -74,9 +74,9 @@ export default function Navbar() {
               Get Started Free
             </button>
             <VeteranIntakeModal 
-                            isOpen={isModalOpen} 
-                            onClose={() => setIsModalOpen(false)}
-                            />
+              isOpen={isModalOpen} 
+              onClose={() => setIsModalOpen(false)}
+              />
             
           </div>
 
@@ -147,11 +147,16 @@ export default function Navbar() {
 
               <button
                 type="button"
-                onClick={() => handleNavigate('/for-veterans')}
+                onClick={() => setIsModalOpen(true)}
                 className="w-full rounded-md bg-crimson-700 px-4 py-3 text-base font-semibold text-white transition hover:bg-crimson-500"
               >
                 Get Started Free
               </button>
+
+              <VeteranIntakeModal 
+              isOpen={isModalOpen} 
+              onClose={() => setIsModalOpen(false)}
+              />
             </div>
           </div>
         </div>
