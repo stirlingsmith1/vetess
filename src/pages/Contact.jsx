@@ -15,7 +15,6 @@ export default function Contact() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -74,13 +73,7 @@ export default function Contact() {
   return (
     <main className="min-h-screen bg-[#FAF7F1] text-[#14224A]">
       <section className="bg-[#243866] px-6 py-24 text-center text-white">
-        <h1 className="font-serif text-5xl font-bold md:text-6xl">
-          Get In Touch
-        </h1>
-
-        <p className="mx-auto mt-5 max-w-2xl text-sm text-white/80 md:text-base">
-          Have questions? We are here to help veterans and employers connect.
-        </p>
+        <h1 className="text-5xl font-bold">Get In Touch</h1>
       </section>
 
       <section className="mx-auto grid max-w-6xl gap-10 px-6 py-20 lg:grid-cols-[0.85fr_1.25fr]">
