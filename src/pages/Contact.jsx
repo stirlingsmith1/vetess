@@ -20,15 +20,16 @@ export default function Contact() {
       ({ ...prev, [name]: value }));
   };
 
-  const submittoSupabase = async (e) => {
-    try {
-      const { data, error } = await supabase.from("submissions").insert([
-        firstName: '${data.firstName}', ${data.lastName}',
-        email: data.email,
-        phone: data.phone,
-        subject: data.subject,
-        message: data.message,
-      ]);
+ const { data, error } = await supabase.from("submissions").insert([
+  {
+    firstName: formData.firstName,
+    lastName: formData.lastName,
+    email: formData.email,
+    phone: formData.phone,
+    subject: formData.subject,
+    message: formData.message,
+  },
+]);
 
       if (error) {
         console.error("Supabase error:", error);
