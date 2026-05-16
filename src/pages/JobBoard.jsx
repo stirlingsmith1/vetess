@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import JobCard from "../components/JobCard";
+import JobCenterMap from '../components/JobCenterMap'
 
 /* fake jobs for now so the page feels full + real */
 const jobs = [
@@ -345,15 +346,9 @@ export default function JobBoard() {
           {activeView === "map" && (
             <div className="px-5 py-5 sm:px-8 sm:py-6 lg:px-10">
               <div className="overflow-hidden rounded-[20px] border border-[#e2ddd2] bg-[#f3eee4] shadow-sm">
-                <div className="relative h-[420px] w-full bg-[#dbe8ec] sm:h-[500px]">
-                  <iframe
-                    title="United States Job Map"
-                    src="https://www.google.com/maps?q=United%20States&z=4&output=embed"
-                    className="h-full w-full border-0"
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  />
-                </div>
+                <div className="relative h-[420px] w-full sm:h-[500px]">
+  <JobCenterMap />
+</div>
               </div>
 
               <div className="mt-5 rounded-[20px] border border-[#ebe3d7] bg-[#f7f1e7] p-5 shadow-[0_1px_4px_rgba(70,52,24,0.03)] sm:p-6">
